@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Warm cream background, deep ink text, vivid teal accent */
+    --background: 40 33% 97%;
+    --foreground: 200 30% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 200 30% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 200 30% 8%;
+
+    --primary: 178 84% 38%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 174 90% 52%;
+    --primary-soft: 178 60% 92%;
+
+    --secondary: 200 30% 8%;
+    --secondary-foreground: 40 33% 97%;
+
+    --muted: 40 20% 92%;
+    --muted-foreground: 200 12% 38%;
+
+    --accent: 30 90% 65%;
+    --accent-foreground: 200 30% 8%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 200 15% 88%;
+    --input: 200 15% 88%;
+    --ring: 178 84% 38%;
+
+    --radius: 1.25rem;
+
+    --gradient-mesh: radial-gradient(1200px 600px at 10% -10%, hsl(178 84% 38% / 0.18), transparent 60%),
+                     radial-gradient(800px 500px at 100% 0%, hsl(30 90% 65% / 0.18), transparent 55%),
+                     radial-gradient(900px 600px at 50% 100%, hsl(174 90% 52% / 0.12), transparent 55%);
+    --gradient-ink: linear-gradient(180deg, hsl(200 30% 8%) 0%, hsl(200 35% 14%) 100%);
+    --gradient-cta: linear-gradient(135deg, hsl(178 84% 38%) 0%, hsl(174 90% 52%) 100%);
+    --gradient-warm: linear-gradient(135deg, hsl(30 90% 65%) 0%, hsl(20 85% 60%) 100%);
+
+    --shadow-xs: 0 1px 2px hsl(200 30% 8% / 0.04);
+    --shadow-soft: 0 1px 2px hsl(200 30% 8% / 0.04), 0 8px 24px -12px hsl(200 30% 8% / 0.08);
+    --shadow-card: 0 1px 2px hsl(200 30% 8% / 0.04), 0 24px 60px -28px hsl(200 30% 8% / 0.18);
+    --shadow-glow: 0 30px 80px -30px hsl(178 84% 38% / 0.5);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+  .font-serif { font-family: 'Instrument Serif', serif; font-weight: 400; }
+  ::selection { background: hsl(var(--primary) / 0.25); }
+}
+
+@layer utilities {
+  .gradient-mesh { background-image: var(--gradient-mesh); }
+  .gradient-ink { background-image: var(--gradient-ink); }
+  .gradient-cta { background-image: var(--gradient-cta); }
+  .gradient-warm { background-image: var(--gradient-warm); }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-card { box-shadow: var(--shadow-card); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  .glass {
+    background: hsl(var(--background) / 0.65);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid hsl(var(--border) / 0.6);
+  }
+  .glass-dark {
+    background: hsl(200 30% 8% / 0.6);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid hsl(0 0% 100% / 0.08);
+  }
+
+  .noise::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    opacity: 0.5; mix-blend-mode: overlay; pointer-events: none;
+  }
+
+  .marquee { animation: marquee 40s linear infinite; }
+}
+
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes blob { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(30px,-20px) scale(1.05)} 66%{transform:translate(-20px,30px) scale(0.95)} }
+@keyframes float-slow { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+
+.animate-blob { animation: blob 14s ease-in-out infinite; }
+.animate-float-slow { animation: float-slow 7s ease-in-out infinite; }
